@@ -1,21 +1,21 @@
-import { Injectable, NestMiddleware, Inject } from '@nestjs/common';
-import { CommonFunctionsService } from '../../common/common-functions.service';
-import { Sequelize } from 'sequelize-typescript';
+import { Injectable, NestMiddleware, Inject } from '@nestjs/common'
+import { CommonFunctionsService } from '../../common/common-functions.service'
+import { Sequelize } from 'sequelize-typescript'
 
 @Injectable()
 export class MetodosPagoMiddleware implements NestMiddleware {
   constructor(
     private readonly commonService: CommonFunctionsService,
-    @Inject('Sequelize') private sequelize: Sequelize,
+    @Inject('Sequelize') private sequelize: Sequelize
   ) {}
 
   use(req: any, res: any, next: () => void) {
-    const model = this.sequelize.models.;
+    const model = this.sequelize.models.MetodoPago
     if (model) {
-      this.commonService.model = model;
-      next();
+      this.commonService.model = model
+      next()
     } else {
-      res.send({ status: false, error: 'Modelo no Definido' });
+      res.send({ status: false, error: 'Modelo no Definido' })
     }
   }
 }

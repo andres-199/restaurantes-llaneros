@@ -9,6 +9,6 @@ import { CommonModule } from '../../common/common.module';
 })
 export class CategoriasModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(CategoriasMiddleware).forRoutes('public/categorias')
+    consumer.apply(CategoriasMiddleware).forRoutes('categorias')
   }
 }

@@ -1,40 +1,35 @@
 import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript'
-import {  } from '../restaurantes-metodos_pago/restaurantes-metodos_pago.entity'
+import { RestauranteMetodoPago } from '../restaurantes-metodos-pago/restaurantes-metodos-pago.entity'
 
 @Table({
-	schema: 'public',
-	tableName: 'metodos_pago',
+  schema: 'public',
+  tableName: 'metodos_pago'
 })
-
-export class  extends Model<> {
-
-	@Column({
-  	type: DataType.INTEGER,
-  	autoIncrement: true,
-  	primaryKey: true,
-  	unique: true,
-  	field: 'id',
-	})
-	id: number
-
-
+export class MetodoPago extends Model<MetodoPago> {
+  @Column({
+    type: DataType.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    unique: true,
+    field: 'id'
+  })
+  id: number
 
   @Column
-	nombre: string
+  nombre: string
 
   @Column
-	descripcion: string
+  descripcion: string
 
   @Column
-	createdAt: Date
+  createdAt: Date
 
   @Column
-	updatedAt: Date
+  updatedAt: Date
 
-
-
-  @HasMany(() => , { as: '', foreignKey: 'metodo_pago_id' })
-	: []
-
-
+  @HasMany(() => RestauranteMetodoPago, {
+    as: '',
+    foreignKey: 'metodo_pago_id'
+  })
+  RestauranteMetodoPago: RestauranteMetodoPago[]
 }

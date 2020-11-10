@@ -9,6 +9,6 @@ import { CommonModule } from '../../common/common.module';
 })
 export class ImagenesModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ImagenesMiddleware).forRoutes('public/imagenes')
+    consumer.apply(ImagenesMiddleware).forRoutes('imagenes')
   }
 }

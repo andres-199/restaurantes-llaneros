@@ -9,6 +9,6 @@ import { CommonModule } from '../../common/common.module';
 })
 export class MesasModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(MesasMiddleware).forRoutes('public/mesas')
+    consumer.apply(MesasMiddleware).forRoutes('mesas')
   }
 }
