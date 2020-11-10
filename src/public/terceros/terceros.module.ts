@@ -9,6 +9,6 @@ import { CommonModule } from '../../common/common.module';
 })
 export class TercerosModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(TercerosMiddleware).forRoutes('public/terceros')
+    consumer.apply(TercerosMiddleware).forRoutes('terceros')
   }
 }

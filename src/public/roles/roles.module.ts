@@ -9,6 +9,6 @@ import { CommonModule } from '../../common/common.module';
 })
 export class RolesModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(RolesMiddleware).forRoutes('public/roles')
+    consumer.apply(RolesMiddleware).forRoutes('roles')
   }
 }

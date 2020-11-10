@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common'
+import { Routes } from 'nest-router'
 import { CategoriasModule } from './categorias/categorias.module'
 import { DetalleVentasModule } from './detalle-ventas/detalle-ventas.module'
 import { DireccionesModule } from './direcciones/direcciones.module'
@@ -15,23 +15,20 @@ import { TercerosModule } from './terceros/terceros.module'
 import { UsuariosModule } from './usuarios/usuarios.module'
 import { VentasModule } from './ventas/ventas.module'
 
-@Module({
-  imports: [
-    CategoriasModule,
-    DetalleVentasModule,
-    DireccionesModule,
-    ImagenesModule,
-    MesasModule,
-    MetodosPagoModule,
-    ProductosModule,
-    ReservasModule,
-    ReservasMesasModule,
-    RestaurantesModule,
-    RestaurantesMetodosPagoModule,
-    RolesModule,
-    TercerosModule,
-    UsuariosModule,
-    VentasModule
-  ]
-})
-export class PublicModule {}
+export const publicRoutes: Routes = [
+  { path: 'categorias', module: CategoriasModule },
+  { path: 'detalle-ventas', module: DetalleVentasModule },
+  { path: 'direcciones', module: DireccionesModule },
+  { path: 'imagenes', module: ImagenesModule },
+  { path: 'mesas', module: MesasModule },
+  { path: 'metodos-pago', module: MetodosPagoModule },
+  { path: 'productos', module: ProductosModule },
+  { path: 'reservas', module: ReservasModule },
+  { path: 'reservas-mesas', module: ReservasMesasModule },
+  { path: 'restaurantes', module: RestaurantesModule },
+  { path: 'restaurantes-metodos-pago', module: RestaurantesMetodosPagoModule },
+  { path: 'roles', module: RolesModule },
+  { path: 'terceros', module: TercerosModule },
+  { path: 'usuarios', module: UsuariosModule },
+  { path: 'ventas', module: VentasModule }
+]

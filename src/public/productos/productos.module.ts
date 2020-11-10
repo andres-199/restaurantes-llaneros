@@ -9,6 +9,6 @@ import { CommonModule } from '../../common/common.module';
 })
 export class ProductosModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ProductosMiddleware).forRoutes('public/productos')
+    consumer.apply(ProductosMiddleware).forRoutes('productos')
   }
 }
