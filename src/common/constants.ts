@@ -3,9 +3,9 @@ const dbConfig = {
   host: '157.245.91.192',
   port: 5432,
   username: 'postgres',
-  password: '',
+  password: 'restaurantesllaneros',
   database: 'restaurantes',
   user: 'postgres'
 }
 
-module.exports.dbConfig = dbConfig;
+module.exports.dbConfig = dbConfig
