@@ -14,6 +14,7 @@ import { RolesModule } from './roles/roles.module'
 import { TercerosModule } from './terceros/terceros.module'
 import { UsuariosModule } from './usuarios/usuarios.module'
 import { VentasModule } from './ventas/ventas.module'
+import { AuthModule } from './auth/auth.module'
 
 @Module({
   imports: [
@@ -31,7 +32,9 @@ import { VentasModule } from './ventas/ventas.module'
     RolesModule,
     TercerosModule,
     UsuariosModule,
-    VentasModule
-  ]
+    VentasModule,
+    AuthModule
+  ],
+  providers: []
 })
 export class PublicModule {}
