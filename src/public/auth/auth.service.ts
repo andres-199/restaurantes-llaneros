@@ -12,7 +12,11 @@ export class AuthService {
     const options: FindOptions = {}
     options.where = { usuario: userdata.usuario }
     const user = await Usuario.findOne(options)
+<<<<<<< HEAD
+    const _user: LoginData = user?.toJSON()
+=======
     const _user: LoginData = user.toJSON()
+>>>>>>> 1843edd4fc0e0ce25355abf3511a19ac56d2eaae
 
     if (_user && _user.contrasena === userdata.contrasena) {
       const { contrasena, ...result } = _user
