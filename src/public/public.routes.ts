@@ -14,6 +14,7 @@ import { RolesModule } from './roles/roles.module'
 import { TercerosModule } from './terceros/terceros.module'
 import { UsuariosModule } from './usuarios/usuarios.module'
 import { VentasModule } from './ventas/ventas.module'
+import { AuthModule } from './auth/auth.module'
 
 export const publicRoutes: Routes = [
   { path: 'categorias', module: CategoriasModule },
@@ -30,5 +31,6 @@ export const publicRoutes: Routes = [
   { path: 'roles', module: RolesModule },
   { path: 'terceros', module: TercerosModule },
   { path: 'usuarios', module: UsuariosModule },
-  { path: 'ventas', module: VentasModule }
+  { path: 'ventas', module: VentasModule },
+  { path: 'auth', module: AuthModule }
 ]
