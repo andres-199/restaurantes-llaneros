@@ -1,6 +1,7 @@
 import { HttpException, Inject, Injectable } from '@nestjs/common'
+import sequelize = require('sequelize')
 import { Sequelize } from 'sequelize-typescript'
-import { CreateOptions } from 'sequelize/types'
+import { CreateOptions, FindOptions } from 'sequelize/types'
 import { ErrorResponse } from 'src/interfaces/error-response.interface'
 import { _Response } from 'src/interfaces/response.interface'
 import { Roles } from '../../interfaces/roles.enum'
@@ -35,5 +36,21 @@ export class TercerosService {
     response.message =
       'Te has registrado en Restaurantes Llaneros, ingresa con tu correo y contraseña y disfruta todo lo que tenemos para ti.😊'
     return response
+  }
+
+  search(value: string) {
+    value = `%${value}%`
+    const { Tercero } = this.sequelize.models
+    const options: FindOptions = {}
+    const op = sequelize.Op
+    const searchRule = { [op.iLike]: value }
+    options.where = {
+      [op.or]: {
+        nombre: searchRule,
+        email: searchRule
+      }
+    }
+
+    return Tercero.findAll(options)
   }
 }
