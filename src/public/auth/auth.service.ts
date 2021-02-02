@@ -11,6 +11,7 @@ export class AuthService {
     const { Usuario } = this.sequelize.models
     const options: FindOptions = {}
     options.where = { usuario: userdata.usuario }
+    options.include=[{association:'Tercero',attributes:['restaurante_id']}]
     const user = await Usuario.findOne(options)
     const _user: LoginData = user?.toJSON()
 
