@@ -2,6 +2,7 @@ import { HttpException, Inject, Injectable } from '@nestjs/common'
 import { Sequelize } from 'sequelize-typescript'
 import { FindOptions, UpdateOptions } from 'sequelize/types'
 import { Roles } from '../../interfaces/roles.enum'
+import { Producto } from '../productos/producto.interface'
 import { TerceroCreate } from '../terceros/tercero-create.interface'
 import { Usuario } from '../usuarios/usuario.interface'
 
@@ -22,7 +23,7 @@ export class RestaurantesService {
       await Usuario.update(usuario, options)
 
       return { message: 'El usuario se agregó correctamente.' }
-    })    
+    })
   }
 
   findAll() {
@@ -69,5 +70,18 @@ export class RestaurantesService {
         throw new HttpException('El usuario no pertenece al restaurante', 401)
       }
     })
+  }
+
+  getProducts(restauranteId) {
+    const { Producto } = this.sequelize.models
+    const options: FindOptions = {}
+    options.where = { restaurante_id: restauranteId }
+    return Producto.findAll(options)
+  }
+
+  addProduct(restauranteId: number, producto: Producto) {
+    producto.restaurante_id = restauranteId
+    const { Producto } = this.sequelize.models
+    return Producto.create(producto)
   }
 }
