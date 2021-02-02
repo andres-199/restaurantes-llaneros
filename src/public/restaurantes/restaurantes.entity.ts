@@ -1,5 +1,6 @@
 import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript'
 import { Direccion } from '../direcciones/direcciones.entity'
+import { Tercero } from '../terceros/terceros.entity'
 
 @Table({
   schema: 'public',
@@ -32,4 +33,7 @@ export class Restaurant extends Model<Restaurant> {
 
   @HasMany(() => Direccion, { as: 'Direccion', foreignKey: 'propietario_id' })
   Direccion: Direccion[]
+
+  @HasMany(() => Tercero, { as: 'Personal', foreignKey: 'restaurante_id' })
+  Personal: Tercero[]
 }
