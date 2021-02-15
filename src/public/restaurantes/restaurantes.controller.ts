@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { Producto } from '../productos/producto.interface'
 import { TerceroCreate } from '../terceros/tercero-create.interface'
 import { RestaurantesService } from './restaurantes.service'
@@ -35,11 +35,35 @@ export class RestaurantesController {
     return await this.restauranteService.addProduct(restauranteId, producto)
   }
 
+  @Put(':id/productos')
+  async updateProduct(
+    @Param('id') restauranteId: number,
+    @Body() producto: Producto
+  ) {
+    return await this.restauranteService.updateProduct(restauranteId, producto)
+  }
+
+  @Delete(':id/productos/:productoId')
+  async deleteProduct(
+    @Param('id') restauranteId: number,
+    @Param('productoId') productoId: number
+  ) {
+    return await this.restauranteService.deleteProduct(
+      restauranteId,
+      productoId
+    )
+  }
+
   @Delete(':id/personal/:terceroId')
   async removePeople(
     @Param('id') restauranteId: number,
     @Param('terceroId') terceroId: number
   ) {
     return await this.restauranteService.removePeople(restauranteId, terceroId)
+  }
+
+  @Get(':id/mesas')
+  async getMesas(@Param('id') restauranteId: number) {
+    return await this.restauranteService.getMesas(restauranteId)
   }
 }

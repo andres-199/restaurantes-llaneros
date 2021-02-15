@@ -1,4 +1,9 @@
-import { HttpException, Inject, Injectable } from '@nestjs/common'
+import {
+  HttpException,
+  Inject,
+  Injectable,
+  UnauthorizedException
+} from '@nestjs/common'
 import { Sequelize } from 'sequelize-typescript'
 import { FindOptions, UpdateOptions } from 'sequelize/types'
 import { Roles } from '../../interfaces/roles.enum'
@@ -72,7 +77,7 @@ export class RestaurantesService {
     })
   }
 
-  getProducts(restauranteId) {
+  getProducts(restauranteId: number) {
     const { Producto } = this.sequelize.models
     const options: FindOptions = {}
     options.where = { restaurante_id: restauranteId }
@@ -83,5 +88,32 @@ export class RestaurantesService {
     producto.restaurante_id = restauranteId
     const { Producto } = this.sequelize.models
     return Producto.create(producto)
+  }
+
+  async updateProduct(restauranteId: number, producto: Producto) {
+    const _producto = await this.getProductById(restauranteId, producto.id)
+    if (!_producto) throw new UnauthorizedException()
+    return await _producto.update(producto)
+  }
+
+  private async getProductById(restauranteId: number, productoId: number) {
+    const { Producto } = this.sequelize.models
+    const options: FindOptions = {
+      where: { restaurante_id: restauranteId }
+    }
+    return await Producto.findByPk(productoId, options)
+  }
+
+  async deleteProduct(restauranteId: number, productoId: number) {
+    const _producto = await this.getProductById(restauranteId, productoId)
+    if (!_producto) throw new UnauthorizedException()
+    return await _producto.destroy()
+  }
+
+  getMesas(restauranteId: number) {
+    const { Mesa } = this.sequelize.models
+    const options: FindOptions = {}
+    options.where = { restaurante_id: restauranteId }
+    return Mesa.findAll(options)
   }
 }
