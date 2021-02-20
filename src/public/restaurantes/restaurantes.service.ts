@@ -7,6 +7,8 @@ import {
 import { Sequelize } from 'sequelize-typescript'
 import { FindOptions, UpdateOptions } from 'sequelize/types'
 import { Roles } from '../../interfaces/roles.enum'
+import { Mesa } from '../mesas/interfaces/mesa.interface'
+import { MesasConfig } from '../mesas/interfaces/mesas-config.interface'
 import { Producto } from '../productos/producto.interface'
 import { TerceroCreate } from '../terceros/tercero-create.interface'
 import { Usuario } from '../usuarios/usuario.interface'
@@ -113,7 +115,46 @@ export class RestaurantesService {
   getMesas(restauranteId: number) {
     const { Mesa } = this.sequelize.models
     const options: FindOptions = {}
+    options.order = [['id', 'ASC']]
     options.where = { restaurante_id: restauranteId }
     return Mesa.findAll(options)
+  }
+
+  createMesas(restauranteId: number, mesasConfig: MesasConfig) {
+    const { Mesa } = this.sequelize.models
+    const mesas: Mesa[] = []
+    const cantidad = mesasConfig.cantidadMesas
+    const cupo = mesasConfig.cupoMesas
+    const restaurante_id = restauranteId
+
+    for (let i = 0; i < cantidad; i++) {
+      const nombre = `mesa-${i}`
+      const mesa: Mesa = { cupo, restaurante_id, nombre }
+      mesas.push(mesa)
+    }
+
+    return Mesa.bulkCreate(mesas)
+  }
+
+  createMesa(restauranteId: number, mesa: Mesa) {
+    mesa.restaurante_id = restauranteId
+    const { Mesa } = this.sequelize.models
+    return Mesa.create(mesa)
+  }
+
+  async updateMesa(restauranteId: number, mesa: Mesa) {
+    const { Mesa } = this.sequelize.models
+    const _mesa: any = await Mesa.findByPk(mesa.id)
+    if (_mesa.restaurante_id !== restauranteId)
+      throw new UnauthorizedException()
+
+    return _mesa.update(mesa)
+  }
+
+  async deleteMesa(mesaId: number, restauranteId: number) {
+    const { Mesa } = this.sequelize.models
+    const mesa: any = await Mesa.findByPk(mesaId)
+    if (mesa.restaurante_id !== restauranteId) throw new UnauthorizedException()
+    return mesa.destroy()
   }
 }

@@ -1,4 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
+import { Mesa } from '../mesas/interfaces/mesa.interface'
+import { MesasConfig } from '../mesas/interfaces/mesas-config.interface'
 import { Producto } from '../productos/producto.interface'
 import { TerceroCreate } from '../terceros/tercero-create.interface'
 import { RestaurantesService } from './restaurantes.service'
@@ -65,5 +67,31 @@ export class RestaurantesController {
   @Get(':id/mesas')
   async getMesas(@Param('id') restauranteId: number) {
     return await this.restauranteService.getMesas(restauranteId)
+  }
+
+  @Post(':id/mesas-multiple')
+  async createMesas(
+    @Param('id') restauranteId: number,
+    @Body() mesasConfig: MesasConfig
+  ) {
+    return await this.restauranteService.createMesas(restauranteId, mesasConfig)
+  }
+
+  @Put(':id/mesas')
+  async updateMesa(@Param('id') restauranteId: number, @Body() mesa: Mesa) {
+    return await this.restauranteService.updateMesa(restauranteId, mesa)
+  }
+
+  @Post(':id/mesas')
+  async createMesa(@Param('id') restauranteId: number, @Body() mesa: Mesa) {
+    return await this.restauranteService.createMesa(restauranteId, mesa)
+  }
+
+  @Delete(':id/mesas/:mesaId')
+  async deleteMesa(
+    @Param('mesaId') mesaId: number,
+    @Param('id') restauranteId: number
+  ) {
+    return await this.restauranteService.deleteMesa(mesaId, restauranteId)
   }
 }
