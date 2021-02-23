@@ -157,4 +157,10 @@ export class RestaurantesService {
     if (mesa.restaurante_id !== restauranteId) throw new UnauthorizedException()
     return mesa.destroy()
   }
+
+  findById(restauranteId: number) {
+    const { Restaurant } = this.sequelize.models
+    const options: FindOptions = {}
+    return Restaurant.findByPk(restauranteId)
+  }
 }
