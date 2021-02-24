@@ -14,7 +14,7 @@ import { Imagen } from '../imagenes/imagenes.entity'
 @Table({
   schema: 'public',
   tableName: 'productos',
-  defaultScope: { include: ['Imagenes'] }
+  defaultScope: { include: ['Imagenes', 'Categoria'] }
 })
 export class Producto extends Model<Producto> {
   @Column({

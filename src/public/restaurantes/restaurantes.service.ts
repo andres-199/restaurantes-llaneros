@@ -161,6 +161,10 @@ export class RestaurantesService {
   findById(restauranteId: number) {
     const { Restaurant } = this.sequelize.models
     const options: FindOptions = {}
-    return Restaurant.findByPk(restauranteId)
+    options.include = [
+      'Productos',
+      { association: 'Mesas', where: { habilitada: true }, required: false }
+    ]
+    return Restaurant.findByPk(restauranteId, options)
   }
 }

@@ -1,5 +1,6 @@
 import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript'
-import { Direccion } from '../direcciones/direcciones.entity'
+import { Mesa } from '../mesas/mesas.entity'
+import { Producto } from '../productos/productos.entity'
 import { Tercero } from '../terceros/terceros.entity'
 
 @Table({
@@ -28,9 +29,15 @@ export class Restaurant extends Model<Restaurant> {
   @Column
   updatedAt: Date
 
-  @Column
-  imagen: string
+  @Column({ type: DataType.JSON })
+  imagen: JSON
 
   @HasMany(() => Tercero, { as: 'Personal', foreignKey: 'restaurante_id' })
   Personal: Tercero[]
+
+  @HasMany(() => Producto, { foreignKey: 'restaurante_id', as: 'Productos' })
+  Productos: Producto[]
+
+  @HasMany(() => Mesa, { foreignKey: 'restaurante_id', as: 'Mesas' })
+  Mesas: Mesa[]
 }

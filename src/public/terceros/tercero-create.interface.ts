@@ -7,6 +7,5 @@ export interface TerceroCreate {
   email?: string
   identificacion?: string
   restaurante_id?: number
-  telefono?: string
   Usuario?: Usuario
 }
