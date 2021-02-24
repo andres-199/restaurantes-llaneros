@@ -31,9 +31,6 @@ export class Restaurant extends Model<Restaurant> {
   @Column
   imagen: string
 
-  @HasMany(() => Direccion, { as: 'Direccion', foreignKey: 'propietario_id' })
-  Direccion: Direccion[]
-
   @HasMany(() => Tercero, { as: 'Personal', foreignKey: 'restaurante_id' })
   Personal: Tercero[]
 }

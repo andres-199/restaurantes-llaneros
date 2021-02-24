@@ -3,51 +3,34 @@ import { Restaurant } from '../restaurantes/restaurantes.entity'
 import { Tercero } from '../terceros/terceros.entity'
 
 @Table({
-	schema: 'public',
-	tableName: 'direcciones',
+  schema: 'public',
+  tableName: 'direcciones'
 })
-
 export class Direccion extends Model<Direccion> {
-
-	@Column({
-  	type: DataType.INTEGER,
-  	autoIncrement: true,
-  	primaryKey: true,
-  	unique: true,
-  	field: 'id',
-	})
-	id: number
-
-
+  @Column({
+    type: DataType.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    unique: true,
+    field: 'id'
+  })
+  id: number
 
   @Column
-	direccion: string
+  direccion: string
 
   @Column
-	telefono: string
+  telefono: string
 
   @Column
-	nombre: string
+  nombre: string
 
   @Column
-	propietario_id: number
+  principal: boolean
 
   @Column
-	principal: boolean
+  createdAt: Date
 
   @Column
-	createdAt: Date
-
-  @Column
-	updatedAt: Date
-
-
-	@BelongsTo(() => Restaurant, { foreignKey: 'propietario_id', as: 'Restaurant'})
-	Restaurant: Restaurant
-
-	@BelongsTo(() => Tercero, { foreignKey: 'propietario_id', as: 'Tercero'})
-	Tercero: Tercero
-
-
-
+  updatedAt: Date
 }

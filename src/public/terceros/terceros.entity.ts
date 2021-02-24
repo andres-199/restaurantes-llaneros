@@ -41,9 +41,6 @@ export class Tercero extends Model<Tercero> {
   @Column
   updatedAt: Date
 
-  @HasMany(() => Direccion, { as: 'Direccion', foreignKey: 'propietario_id' })
-  Direccion: Direccion[]
-
   @HasOne(() => Usuario, { as: 'Usuario', foreignKey: 'tercero_id' })
   Usuario
 }
