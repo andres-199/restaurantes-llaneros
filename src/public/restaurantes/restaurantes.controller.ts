@@ -95,6 +95,11 @@ export class RestaurantesController {
     return await this.restauranteService.deleteMesa(mesaId, restauranteId)
   }
 
+  @Get(':id/reservas')
+  getReservas(@Param('id') restauranteId: number) {
+    return this.restauranteService.getReservas(restauranteId)
+  }
+
   @Get(':id')
   async findById(@Param('id') restauranteId: number) {
     return await this.restauranteService.findById(restauranteId)

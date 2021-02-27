@@ -1,5 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common'
-import { Reserva } from './reserva.interface'
+import { Controller } from '@nestjs/common'
 import { ReservasService } from './reservas.service'
 
 @Controller()
