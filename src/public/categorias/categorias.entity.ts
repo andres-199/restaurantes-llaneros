@@ -2,39 +2,28 @@ import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript'
 import { Imagen } from '../imagenes/imagenes.entity'
 
 @Table({
-	schema: 'public',
-	tableName: 'categorias',
+  schema: 'public',
+  tableName: 'categorias'
 })
-
 export class Categoria extends Model<Categoria> {
-
-	@Column({
-  	type: DataType.INTEGER,
-  	autoIncrement: true,
-  	primaryKey: true,
-  	unique: true,
-  	field: 'id',
-	})
-	id: number
-
-
+  @Column({
+    type: DataType.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    unique: true,
+    field: 'id'
+  })
+  id: number
 
   @Column
-	nombre: string
+  nombre: string
 
   @Column
-	descripcion: string
+  descripcion: string
 
   @Column
-	createdAt: Date
+  createdAt: Date
 
   @Column
-	updatedAt: Date
-
-
-
-  @HasMany(() => Imagen, { as: 'Imagen', foreignKey: 'propietario_id' })
-	Imagen: Imagen[]
-
-
+  updatedAt: Date
 }

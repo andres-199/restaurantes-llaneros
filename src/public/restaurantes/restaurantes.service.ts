@@ -4,6 +4,7 @@ import {
   Injectable,
   UnauthorizedException
 } from '@nestjs/common'
+import sequelize = require('sequelize')
 import { Sequelize } from 'sequelize-typescript'
 import { FindOptions, UpdateOptions } from 'sequelize/types'
 import { Roles } from '../../interfaces/roles.enum'
@@ -161,6 +162,23 @@ export class RestaurantesService {
   findById(restauranteId: number) {
     const { Restaurant } = this.sequelize.models
     const options: FindOptions = {}
-    return Restaurant.findByPk(restauranteId)
+    options.include = [
+      'Productos',
+      { association: 'Mesas', where: { habilitada: true }, required: false }
+    ]
+    return Restaurant.findByPk(restauranteId, options)
+  }
+
+  getReservas(restauranteId: number) {
+    const { Reserva } = this.sequelize.models
+    const options: FindOptions = {}
+    const Op = sequelize.Op
+    const today = new Date()
+    options.where = {
+      restaurante_id: restauranteId,
+      fecha: { [Op.gte]: today }
+    }
+    options.include = ['Tercero']
+    return Reserva.findAll(options)
   }
 }
