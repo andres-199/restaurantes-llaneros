@@ -15,6 +15,7 @@ import { TercerosModule } from './terceros/terceros.module'
 import { UsuariosModule } from './usuarios/usuarios.module'
 import { VentasModule } from './ventas/ventas.module'
 import { AuthModule } from './auth/auth.module'
+import { CarritoModule } from './carrito/carrito.module'
 
 export const publicRoutes: Routes = [
   { path: 'categorias', module: CategoriasModule },
@@ -32,5 +33,6 @@ export const publicRoutes: Routes = [
   { path: 'terceros', module: TercerosModule },
   { path: 'usuarios', module: UsuariosModule },
   { path: 'ventas', module: VentasModule },
-  { path: 'auth', module: AuthModule }
+  { path: 'auth', module: AuthModule },
+  { path: 'carrito', module: CarritoModule }
 ]

@@ -15,6 +15,7 @@ import { TercerosModule } from './terceros/terceros.module'
 import { UsuariosModule } from './usuarios/usuarios.module'
 import { VentasModule } from './ventas/ventas.module'
 import { AuthModule } from './auth/auth.module'
+import { CarritoModule } from './carrito/carrito.module'
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { AuthModule } from './auth/auth.module'
     TercerosModule,
     UsuariosModule,
     VentasModule,
-    AuthModule
+    AuthModule,
+    CarritoModule
   ],
   providers: []
 })

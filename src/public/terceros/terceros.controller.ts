@@ -19,4 +19,9 @@ export class TercerosController {
   getPerfil(@Param('id') terceroId: number) {
     return this.service.getPerfil(terceroId)
   }
+
+  @Get(':id/ordenes')
+  getOrdenes(@Param('id') terceroId: number) {
+    return this.service.getOrdenes(terceroId)
+  }
 }
