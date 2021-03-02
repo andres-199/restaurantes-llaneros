@@ -61,4 +61,12 @@ export class TercerosService {
     const _restaurante = await Restaurant.findByPk(restauranteId)
     return { Tercero: _tercero, Restaurante: _restaurante }
   }
+
+  getOrdenes(terceroId: number) {
+    const { Carrito } = this.sequelize.models
+    const options: FindOptions = {}
+    options.where = { tercero_id: terceroId }
+    options.include = [{ association: 'Producto', include: ['Restaurant'] }]
+    return Carrito.findAll(options)
+  }
 }
