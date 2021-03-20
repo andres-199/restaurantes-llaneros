@@ -56,7 +56,8 @@ export class TercerosService {
 
   async getPerfil(terceroId: number) {
     const { Tercero, Restaurant } = this.sequelize.models
-    const _tercero: any = await Tercero.findByPk(terceroId)
+    const options: FindOptions = { include: ['Direcciones'] }
+    const _tercero: any = await Tercero.findByPk(terceroId, options)
     const restauranteId = _tercero.restaurante_id
     const _restaurante = await Restaurant.findByPk(restauranteId)
     return { Tercero: _tercero, Restaurante: _restaurante }

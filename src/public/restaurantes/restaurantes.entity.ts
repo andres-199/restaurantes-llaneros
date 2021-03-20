@@ -24,6 +24,9 @@ export class Restaurant extends Model<Restaurant> {
   descripcion: string
 
   @Column
+  direccion: string
+
+  @Column
   createdAt: Date
 
   @Column

@@ -1,6 +1,4 @@
-import { Table, Model, Column, DataType, BelongsTo } from 'sequelize-typescript'
-import { Restaurant } from '../restaurantes/restaurantes.entity'
-import { Tercero } from '../terceros/terceros.entity'
+import { Table, Model, Column, DataType } from 'sequelize-typescript'
 
 @Table({
   schema: 'public',
@@ -33,4 +31,7 @@ export class Direccion extends Model<Direccion> {
 
   @Column
   updatedAt: Date
+
+  @Column
+  tercero_id: number
 }
