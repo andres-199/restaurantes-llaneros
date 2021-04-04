@@ -11,6 +11,6 @@ export class RestaurantesMetodosPagoModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(RestaurantesMetodosPagoMiddleware)
-      .forRoutes('restaurantes_metodos_pago')
+      .forRoutes('restaurantes-metodos-pago')
   }
 }

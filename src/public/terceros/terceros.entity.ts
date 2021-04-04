@@ -43,4 +43,7 @@ export class Tercero extends Model<Tercero> {
 
   @HasOne(() => Usuario, { as: 'Usuario', foreignKey: 'tercero_id' })
   Usuario
+
+  @HasMany(() => Direccion, { as: 'Direcciones', foreignKey: 'tercero_id' })
+  Direcciones: Direccion[]
 }

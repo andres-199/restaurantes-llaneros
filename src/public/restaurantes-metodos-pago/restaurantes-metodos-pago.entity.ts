@@ -42,7 +42,10 @@ export class RestauranteMetodoPago extends Model<RestauranteMetodoPago> {
   @Column
   updatedAt: Date
 
-  @BelongsTo(() => MetodoPago, { foreignKey: 'metodo_pago_id', as: '' })
+  @BelongsTo(() => MetodoPago, {
+    foreignKey: 'metodo_pago_id',
+    as: 'MetodoPago'
+  })
   MetodoPago: MetodoPago
 
   @BelongsTo(() => Restaurant, {

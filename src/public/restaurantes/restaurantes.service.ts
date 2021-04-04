@@ -181,4 +181,12 @@ export class RestaurantesService {
     options.include = ['Tercero']
     return Reserva.findAll(options)
   }
+
+  async getPaymentMethods(restauranteId: number) {
+    const { Restaurant } = this.sequelize.models
+    const options: FindOptions = {}
+    options.include = ['MetodosPago']
+    const restaurante = await Restaurant.findByPk(restauranteId, options)
+    return restaurante['MetodosPago']
+  }
 }
