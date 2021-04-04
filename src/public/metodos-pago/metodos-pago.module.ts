@@ -9,6 +9,6 @@ import { CommonModule } from '../../common/common.module'
 })
 export class MetodosPagoModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(MetodosPagoMiddleware).forRoutes('metodos_pago')
+    consumer.apply(MetodosPagoMiddleware).forRoutes('metodos-pago')
   }
 }

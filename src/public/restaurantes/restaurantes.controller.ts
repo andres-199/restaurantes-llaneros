@@ -100,6 +100,11 @@ export class RestaurantesController {
     return this.restauranteService.getReservas(restauranteId)
   }
 
+  @Get(':id/metodos-pago')
+  getPaymentMethods(@Param('id') restauranteId: number) {
+    return this.restauranteService.getPaymentMethods(restauranteId)
+  }
+
   @Get(':id')
   async findById(@Param('id') restauranteId: number) {
     return await this.restauranteService.findById(restauranteId)

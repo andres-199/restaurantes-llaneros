@@ -1,6 +1,15 @@
-import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript'
+import {
+  Table,
+  Model,
+  Column,
+  DataType,
+  HasMany,
+  BelongsToMany
+} from 'sequelize-typescript'
 import { Mesa } from '../mesas/mesas.entity'
+import { MetodoPago } from '../metodos-pago/metodos-pago.entity'
 import { Producto } from '../productos/productos.entity'
+import { RestauranteMetodoPago } from '../restaurantes-metodos-pago/restaurantes-metodos-pago.entity'
 import { Tercero } from '../terceros/terceros.entity'
 
 @Table({
@@ -43,4 +52,12 @@ export class Restaurant extends Model<Restaurant> {
 
   @HasMany(() => Mesa, { foreignKey: 'restaurante_id', as: 'Mesas' })
   Mesas: Mesa[]
+
+  @BelongsToMany(() => MetodoPago, {
+    through: () => RestauranteMetodoPago,
+    as: 'MetodosPago',
+    foreignKey: 'restaurante_id',
+    otherKey: 'metodo_pago_id'
+  })
+  MetodosPago: MetodoPago[]
 }

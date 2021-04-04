@@ -59,7 +59,10 @@ export class TercerosService {
     const options: FindOptions = { include: ['Direcciones'] }
     const _tercero: any = await Tercero.findByPk(terceroId, options)
     const restauranteId = _tercero.restaurante_id
-    const _restaurante = await Restaurant.findByPk(restauranteId)
+    const _restaurante = await Restaurant.findByPk(restauranteId, {
+      include: ['MetodosPago']
+    })
+
     return { Tercero: _tercero, Restaurante: _restaurante }
   }
 

@@ -1,5 +1,4 @@
 import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript'
-import { RestauranteMetodoPago } from '../restaurantes-metodos-pago/restaurantes-metodos-pago.entity'
 
 @Table({
   schema: 'public',
@@ -22,14 +21,14 @@ export class MetodoPago extends Model<MetodoPago> {
   descripcion: string
 
   @Column
+  imagen: string
+
+  @Column
+  contra_entrega: boolean
+
+  @Column
   createdAt: Date
 
   @Column
   updatedAt: Date
-
-  @HasMany(() => RestauranteMetodoPago, {
-    as: '',
-    foreignKey: 'metodo_pago_id'
-  })
-  RestauranteMetodoPago: RestauranteMetodoPago[]
 }
