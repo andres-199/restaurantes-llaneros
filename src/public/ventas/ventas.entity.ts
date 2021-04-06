@@ -40,8 +40,8 @@ export class Venta extends Model<Venta> {
   @Column
   restaurante_metodo_pago_id: number
 
-  @Column
-  soporte_pago: string
+  @Column({ type: DataType.JSON })
+  soporte_pago: JSON
 
   @Column
   valida: boolean
@@ -51,6 +51,12 @@ export class Venta extends Model<Venta> {
 
   @Column
   updatedAt: Date
+
+  @Column({ type: DataType.JSON })
+  direccion_entrega: JSON
+
+  @Column({ type: DataType.JSON })
+  metodo_pago: JSON
 
   @BelongsTo(() => Restaurant, {
     foreignKey: 'restaurante_id',
