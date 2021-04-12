@@ -37,9 +37,6 @@ export class Venta extends Model<Venta> {
   @Column
   restaurante_id: number
 
-  @Column
-  restaurante_metodo_pago_id: number
-
   @Column({ type: DataType.JSON })
   soporte_pago: JSON
 
@@ -52,6 +49,9 @@ export class Venta extends Model<Venta> {
   @Column
   updatedAt: Date
 
+  @Column
+  rechazada: boolean
+
   @Column({ type: DataType.JSON })
   direccion_entrega: JSON
 
@@ -63,12 +63,6 @@ export class Venta extends Model<Venta> {
     as: 'Restaurant'
   })
   Restaurant: Restaurant
-
-  @BelongsTo(() => RestauranteMetodoPago, {
-    foreignKey: 'restaurante_metodo_pago_id',
-    as: ''
-  })
-  RestauranteMetodoPago: RestauranteMetodoPago
 
   @BelongsTo(() => Tercero, { foreignKey: 'tercero_id', as: 'Tercero' })
   Tercero: Tercero

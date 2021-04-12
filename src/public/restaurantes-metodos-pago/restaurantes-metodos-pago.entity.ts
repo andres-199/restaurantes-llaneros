@@ -53,10 +53,4 @@ export class RestauranteMetodoPago extends Model<RestauranteMetodoPago> {
     as: 'Restaurant'
   })
   Restaurant: Restaurant
-
-  @HasMany(() => Venta, {
-    as: 'Venta',
-    foreignKey: 'restaurante_metodo_pago_id'
-  })
-  Venta: Venta[]
 }
