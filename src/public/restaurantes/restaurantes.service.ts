@@ -189,4 +189,16 @@ export class RestaurantesService {
     const restaurante = await Restaurant.findByPk(restauranteId, options)
     return restaurante['MetodosPago']
   }
+
+  getVentas(restauranteId: number) {
+    const { Venta } = this.sequelize.models
+    const options: FindOptions = {}
+    options.where = { restaurante_id: restauranteId }
+    options.include = [
+      'Tercero',
+      { association: 'DetalleVenta', include: ['Producto'] }
+    ]
+    options.order = ['valida', 'rechazada', 'fecha']
+    return Venta.findAll(options)
+  }
 }

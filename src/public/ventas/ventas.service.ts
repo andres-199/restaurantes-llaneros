@@ -13,6 +13,7 @@ export class VentasService {
       'Tercero',
       { association: 'DetalleVenta', include: ['Producto'] }
     ]
+    options.order = ['valida', 'rechazada', 'fecha']
     return Venta.findAll(options)
   }
 }
