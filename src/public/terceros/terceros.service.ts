@@ -1,7 +1,7 @@
 import { HttpException, Inject, Injectable } from '@nestjs/common'
 import sequelize = require('sequelize')
 import { Sequelize } from 'sequelize-typescript'
-import { CreateOptions, FindOptions } from 'sequelize/types'
+import { CreateOptions, DestroyOptions, FindOptions } from 'sequelize/types'
 import { ErrorResponse } from 'src/interfaces/error-response.interface'
 import { _Response } from 'src/interfaces/response.interface'
 import { Roles } from '../../interfaces/roles.enum'
@@ -72,5 +72,33 @@ export class TercerosService {
     options.where = { tercero_id: terceroId }
     options.include = [{ association: 'Producto', include: ['Restaurant'] }]
     return Carrito.findAll(options)
+  }
+
+  getReservas(terceroId: number) {
+    const { Reserva } = this.sequelize.models
+    const options: FindOptions = {}
+    options.where = { tercero_id: terceroId }
+    options.include = ['Restaurant']
+    options.order = [['fecha', 'desc']]
+    return Reserva.findAll(options)
+  }
+
+  deleteReserva(reservaId: number) {
+    const { Reserva } = this.sequelize.models
+    const options: DestroyOptions = {}
+    options.where = { id: reservaId }
+    return Reserva.destroy(options)
+  }
+
+  getCompras(terceroId: number) {
+    const { Venta } = this.sequelize.models
+    const options: FindOptions = {}
+    options.where = { tercero_id: terceroId }
+    options.include = [
+      { association: 'DetalleVenta', include: ['Producto'] },
+      'Restaurant'
+    ]
+    options.order = [['fecha', 'DESC'], 'rechazada', 'valida']
+    return Venta.findAll(options)
   }
 }

@@ -198,7 +198,7 @@ export class RestaurantesService {
       'Tercero',
       { association: 'DetalleVenta', include: ['Producto'] }
     ]
-    options.order = ['valida', 'rechazada', 'fecha']
+    options.order = [['fecha', 'DESC'], 'valida', 'rechazada']
     return Venta.findAll(options)
   }
 }
