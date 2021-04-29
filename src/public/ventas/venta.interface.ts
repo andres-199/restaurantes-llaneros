@@ -1,3 +1,5 @@
+import { MetodoPago } from '../metodos-pago/metodo-pago.interface'
+
 export interface Venta {
   id?: number
   tercero_id?: number
@@ -8,5 +10,5 @@ export interface Venta {
   valida?: boolean
   rechazada?: boolean
   direccion_entrega?: JSON
-  metodo_pago?: JSON
+  metodo_pago?: MetodoPago
 }

@@ -101,4 +101,14 @@ export class TercerosService {
     options.order = [['fecha', 'DESC'], 'rechazada', 'valida']
     return Venta.findAll(options)
   }
+
+  deleteCompra(terceroId: number, compraId: number) {
+    return this.sequelize.transaction(async transaction => {
+      const { Venta } = this.sequelize.models
+      const options: FindOptions = { transaction }
+      options.where = { id: compraId, tercero_id: terceroId }
+      const venta = await Venta.findOne(options)
+      return venta.destroy({ transaction })
+    })
+  }
 }

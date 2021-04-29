@@ -44,6 +44,14 @@ export class TercerosController {
     return this.service.getCompras(terceroId)
   }
 
+  @Delete(':id/compras/:compraId')
+  deleteCompra(
+    @Param('id') terceroId: number,
+    @Param('compraId') compraId: number
+  ) {
+    return this.service.deleteCompra(terceroId, compraId)
+  }
+
   @Delete(':id/reservas/:reservaId')
   deleteReserva(@Param('reservaId') reservaId: number) {
     return this.service.deleteReserva(reservaId)

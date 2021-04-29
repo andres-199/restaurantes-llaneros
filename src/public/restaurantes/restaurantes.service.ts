@@ -13,6 +13,7 @@ import { MesasConfig } from '../mesas/interfaces/mesas-config.interface'
 import { Producto } from '../productos/producto.interface'
 import { TerceroCreate } from '../terceros/tercero-create.interface'
 import { Usuario } from '../usuarios/usuario.interface'
+import { Venta as IVenta } from '../ventas/venta.interface'
 
 @Injectable()
 export class RestaurantesService {
@@ -193,12 +194,22 @@ export class RestaurantesService {
   getVentas(restauranteId: number) {
     const { Venta } = this.sequelize.models
     const options: FindOptions = {}
-    options.where = { restaurante_id: restauranteId }
+    options.where = { restaurante_id: restauranteId, rechazada: false }
     options.include = [
       'Tercero',
       { association: 'DetalleVenta', include: ['Producto'] }
     ]
-    options.order = [['fecha', 'DESC'], 'valida', 'rechazada']
-    return Venta.findAll(options)
+    options.order = [['fecha', 'DESC'], 'valida']
+    return Venta.findAll(options).then(ventas => {
+      return ventas.filter(venta => {
+        const _venta: IVenta = venta.toJSON()
+
+        return !_venta.metodo_pago.contra_entrega
+          ? _venta.soporte_pago
+            ? true
+            : false
+          : true
+      })
+    })
   }
 }

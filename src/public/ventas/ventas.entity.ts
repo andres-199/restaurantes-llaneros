@@ -13,7 +13,13 @@ import { Tercero } from '../terceros/terceros.entity'
 
 @Table({
   schema: 'public',
-  tableName: 'ventas'
+  tableName: 'ventas',
+  hooks: {
+    async beforeBulkUpdate(options) {
+      const venta = await Venta.findByPk(options.where['id'])
+      if (venta.rechazada) options['attributes']['rechazada'] = false
+    }
+  }
 })
 export class Venta extends Model<Venta> {
   @Column({
