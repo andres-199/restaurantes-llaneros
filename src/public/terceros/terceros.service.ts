@@ -77,9 +77,11 @@ export class TercerosService {
   getReservas(terceroId: number) {
     const { Reserva } = this.sequelize.models
     const options: FindOptions = {}
-    options.where = { tercero_id: terceroId }
+    const Op = sequelize.Op
+    const today = new Date()
+    options.where = { tercero_id: terceroId, fecha: { [Op.gte]: today } }
     options.include = ['Restaurant']
-    options.order = [['fecha', 'desc']]
+    options.order = [['fecha', 'ASC']]
     return Reserva.findAll(options)
   }
 

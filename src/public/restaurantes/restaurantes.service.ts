@@ -180,6 +180,7 @@ export class RestaurantesService {
       fecha: { [Op.gte]: today }
     }
     options.include = ['Tercero']
+    options.order = [['fecha', 'ASC']]
     return Reserva.findAll(options)
   }
 
